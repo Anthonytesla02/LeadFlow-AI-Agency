@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Review Collector Inquiry Form</title>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet" />
+  <style>
+    /* Basic Reset */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+      font-family: 'Roboto', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container {
+      background: #fff;
+      width: 100%;
+      max-width: 600px;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      animation: fadeIn 0.8s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .form-header {
+      text-align: center;
+      padding: 30px 20px;
+      background-color: #4a90e2;
+      color: #fff;
+    }
+    .form-header h1 {
+      font-size: 1.8em;
+      margin-bottom: 10px;
+    }
+    .form-header p {
+      font-size: 1em;
+      opacity: 0.9;
+    }
+    .progress-bar {
+      background: #e0e0e0;
+      height: 5px;
+      width: 100%;
+      position: relative;
+    }
+    .progress {
+      background: #4a90e2;
+      height: 100%;
+      width: 0%;
+      transition: width 0.4s ease;
+    }
+    form {
+      padding: 20px;
+    }
+    .form-step {
+      display: none;
+      animation: slideIn 0.5s ease;
+    }
+    .form-step.active {
+      display: block;
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1em;
+      transition: border-color 0.3s;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: #4a90e2;
+      outline: none;
+    }
+    .form-group textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+    .btn-group {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background: #4a90e2;
+      color: #fff;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .btn:hover {
+      background: #3a78c2;
+      transform: translateY(-2px);
+    }
+    .btn:disabled {
+      background: #aaa;
+      cursor: not-allowed;
+      transform: none;
+    }
+    /* Checkbox styling */
+    .checkbox-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 400;
+    }
+    /* Extra reveal fields for extra contact info */
+    .extra-field {
+      display: none;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="form-header">
+      <h1>Review Collector Inquiry Form</h1>
+      <p>Fill in the details below to receive your personalized quote for our plug‐and‐play Google My Business Review Collector solution.</p>
+    </div>
+    <div class="progress-bar">
+      <div class="progress" id="progress"></div>
+    </div>
+    <form id="inquiryForm">
+      <!-- Step 1: Contact Information -->
+      <div class="form-step active">
+        <h2>Contact Information</h2>
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" name="fullName" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" required />
+        </div>
+        <div class="form-group">
+          <label for="preferredContact">Preferred Contact Method</label>
+          <select id="preferredContact" name="preferredContact" required>
+            <option value="">Select an option</option>
+            <option value="Email">Email</option>
+            <option value="Chat">Chat</option>
+            <option value="Other">Other</option>
+          </select>
+          <!-- New extra fields appear when Chat or Other is selected -->
+          <div class="extra-field" id="contactExtraFields">
+            <div class="form-group">
+              <label for="contactPlatform">Contact Platform</label>
+              <select id="contactPlatform" name="contactPlatform">
+                <option value="">Select a platform</option>
+                <option value="Facebook">Facebook</option>
+                <option value="Twitter">Twitter</option>
+                <option value="Instagram">Instagram</option>
+                <option value="LinkedIn">LinkedIn</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="contactHandle">Contact Handle / Account Name</label>
+              <input type="text" id="contactHandle" name="contactHandle" placeholder="Enter your account name" />
+            </div>
+          </div>
+        </div>
+        <div class="btn-group">
+          <button type="button" class="btn" id="nextBtn1">Next</button>
+        </div>
+      </div>
+
+      <!-- Step 2: Practice Details -->
+      <div class="form-step">
+        <h2>Practice Details</h2>
+        <div class="form-group">
+          <label for="practiceName">Practice Name</label>
+          <input type="text" id="practiceName" name="practiceName" required />
+        </div>
+        <div class="form-group">
+          <label for="streetAddress">Street Address</label>
+          <input type="text" id="streetAddress" name="streetAddress" required />
+        </div>
+        <div class="form-group">
+          <label for="city">City</label>
+          <input type="text" id="city" name="city" required />
+        </div>
+        <div class="form-group">
+          <label for="state">State</label>
+          <input type="text" id="state" name="state" required />
+        </div>
+        <div class="form-group">
+          <label for="zip">ZIP Code</label>
+          <input type="text" id="zip" name="zip" required />
+        </div>
+        <div class="form-group">
+          <label for="website">Website URL (Optional)</label>
+          <input type="url" id="website" name="website" placeholder="https://example.com" />
+        </div>
+        <div class="form-group">
+          <label for="locations">Number of Locations</label>
+          <input type="number" id="locations" name="locations" min="1" required />
+        </div>
+        <div class="btn-group">
+          <button type="button" class="btn" id="prevBtn2">Previous</button>
+          <button type="button" class="btn" id="nextBtn2">Next</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Current Review Management & Goals -->
+      <div class="form-step">
+        <h2>Current Review Management & Goals</h2>
+        <div class="form-group">
+          <label for="currentReview">How are you currently managing your online reviews?</label>
+          <select id="currentReview" name="currentReview" required>
+            <option value="">Select an option</option>
+            <option value="Manual">Manual</option>
+            <option value="Third-party software">Third-party software</option>
+            <option value="Not managed">Not managed</option>
+            <option value="Other">Other</option>
+          </select>
+          <div class="extra-field" id="otherReviewDiv">
+            <label for="otherReview">Please specify</label>
+            <input type="text" id="otherReview" name="otherReview" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>What is your primary goal for using the Review Collector?</label>
+          <div class="checkbox-group">
+            <label><input type="checkbox" name="goal" value="Increase review volume" /> Increase review volume</label>
+            <label><input type="checkbox" name="goal" value="Improve overall online reputation" /> Improve overall online reputation</label>
+            <label><input type="checkbox" name="goal" value="Save time on follow-ups" /> Save time on follow-ups</label>
+            <label><input type="checkbox" name="goal" value="Streamline workflow" /> Streamline workflow</label>
+            <label>
+              <input type="checkbox" id="otherGoalCheck" name="goal" value="Other" /> Other
+            </label>
+          </div>
+          <div class="extra-field" id="otherGoalDiv">
+            <label for="otherGoal">Please specify</label>
+            <input type="text" id="otherGoal" name="otherGoal" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="challenges">What challenges are you currently facing in managing your reviews?</label>
+          <textarea id="challenges" name="challenges" required></textarea>
+        </div>
+        <div class="btn-group">
+          <button type="button" class="btn" id="prevBtn3">Previous</button>
+          <button type="button" class="btn" id="nextBtn3">Next</button>
+        </div>
+      </div>
+
+      <!-- Step 4: Budget & Additional Information -->
+      <div class="form-step">
+        <h2>Budget & Additional Information</h2>
+        <div class="form-group">
+          <label for="budget">Budget Range (Approximate)</label>
+          <select id="budget" name="budget" required>
+            <option value="">Select an option</option>
+            <option value="Under $100/month">Under $100/month</option>
+            <option value="$100-$250/month">$100-$250/month</option>
+            <option value="$250-$500/month">$250-$500/month</option>
+            <option value="$500+ per month">$500+ per month</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="comments">Additional Comments or Specific Requirements</label>
+          <textarea id="comments" name="comments"></textarea>
+        </div>
+        <div class="btn-group">
+          <button type="button" class="btn" id="prevBtn4">Previous</button>
+          <button type="submit" class="btn">Submit Inquiry</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // Replace with your deployed Google Apps Script web app URL
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwHC4ZegfC9Y3BdEdvTcD1CObmqUntbpCYE6YK0ymvR44dMh-fu8xUuf0jXiN2SpVno/exec';
+
+    const form = document.getElementById('inquiryForm');
+    const formSteps = document.querySelectorAll('.form-step');
+    const progress = document.getElementById('progress');
+    let currentStep = 0;
+
+    // Function to show a given step
+    function showStep(step) {
+      formSteps.forEach((stepDiv, index) => {
+        stepDiv.classList.toggle('active', index === step);
+      });
+      updateProgressBar();
+    }
+
+    // Update the progress bar width
+    function updateProgressBar() {
+      const stepPercent = ((currentStep) / (formSteps.length - 1)) * 100;
+      progress.style.width = stepPercent + '%';
+    }
+
+    // Navigation button event listeners
+    document.getElementById('nextBtn1').addEventListener('click', () => {
+      currentStep = 1;
+      showStep(currentStep);
+    });
+    document.getElementById('prevBtn2').addEventListener('click', () => {
+      currentStep = 0;
+      showStep(currentStep);
+    });
+    document.getElementById('nextBtn2').addEventListener('click', () => {
+      currentStep = 2;
+      showStep(currentStep);
+    });
+    document.getElementById('prevBtn3').addEventListener('click', () => {
+      currentStep = 1;
+      showStep(currentStep);
+    });
+    document.getElementById('nextBtn3').addEventListener('click', () => {
+      currentStep = 3;
+      showStep(currentStep);
+    });
+    document.getElementById('prevBtn4').addEventListener('click', () => {
+      currentStep = 2;
+      showStep(currentStep);
+    });
+
+    // Reveal extra fields when "Chat" or "Other" is selected in Preferred Contact Method
+    document.getElementById('preferredContact').addEventListener('change', function () {
+      const extraFieldsDiv = document.getElementById('contactExtraFields');
+      if (this.value === 'Chat' || this.value === 'Other') {
+        extraFieldsDiv.style.display = 'block';
+      } else {
+        extraFieldsDiv.style.display = 'none';
+      }
+    });
+
+    // Reveal extra field for "Other" review management
+    document.getElementById('currentReview').addEventListener('change', function () {
+      const otherDiv = document.getElementById('otherReviewDiv');
+      otherDiv.style.display = this.value === 'Other' ? 'block' : 'none';
+    });
+
+    // Reveal extra field for "Other" goal if checkbox is checked
+    document.getElementById('otherGoalCheck').addEventListener('change', function () {
+      const otherGoalDiv = document.getElementById('otherGoalDiv');
+      otherGoalDiv.style.display = this.checked ? 'block' : 'none';
+    });
+
+    // Form submission: send form data as JSON to Google Apps Script
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      // Create a JSON object from the form data
+      const formData = new FormData(form);
+      const data = {};
+      formData.forEach((value, key) => {
+        // For checkboxes (multiple values with same key) join them by comma
+        if (data[key]) {
+          data[key] = data[key] + ', ' + value;
+        } else {
+          data[key] = value;
+        }
+      });
+      
+      // Send data using fetch
+      fetch(scriptURL, {
+        method: 'POST',
+        mode: 'no-cors', // Use no-cors to avoid CORS issues
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      .then(() => {
+        alert('Inquiry submitted successfully!');
+        form.reset();
+        currentStep = 0;
+        showStep(currentStep);
+      })
+      .catch(error => console.error('Error!', error.message));
+    });
+
+    // Initialize the form step view
+    showStep(currentStep);
+  </script>
+</body>
+</html>
